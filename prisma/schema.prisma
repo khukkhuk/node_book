@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model Users {
+  
+  id    Int     @id @default(autoincrement())
+  first_name String?
+  last_name String?
+  tel String?
+  email String?
+  username String?
+  password String?
+  role    role     @default(user)
+  created DateTime @default(now())
+  updated DateTime?
+  deleted DateTime?
+  status status @default(on)
+}
+
+model Book {
+  id    Int     @id @default(autoincrement())
+  name String
+  type Int
+  amount Int
+  author String
+  publisher String
+  created DateTime @default(now())
+  updated DateTime
+  deleted DateTime
+  status status @default(on)
+}
+
+model BookType {
+  id    Int     @id @default(autoincrement())
+  name String
+  created DateTime @default(now())
+  updated DateTime
+  deleted DateTime
+  status status @default(on)
+}
+
+model BookLog {
+  id    Int     @id @default(autoincrement())
+  admin_id Int
+  user_id Int
+  borrow_date DateTime
+  return_date DateTime
+  created DateTime @default(now())
+  updated DateTime
+  deleted DateTime
+  status status @default(on)
+}
+
+enum status{
+  on
+  off
+}
+enum role {
+  user
+  admin
+}
