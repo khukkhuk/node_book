@@ -66,14 +66,75 @@ app.post('/users', function (req, res) { return __awaiter(void 0, void 0, void 0
             case 2:
                 e_1 = _b.sent();
                 console.error(e_1);
-                res.status(500).send('Internal server error aa');
+                res.status(500).send('Internal server error');
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); });
+app.put('/users/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, _a, first_name, last_name, tel, email, username, password, updatedUser, e_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                id = req.params.id;
+                _a = req.body, first_name = _a.first_name, last_name = _a.last_name, tel = _a.tel, email = _a.email, username = _a.username, password = _a.password;
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, prisma.users.update({
+                        where: { id: parseInt(id) },
+                        data: {
+                            first_name: first_name,
+                            last_name: last_name,
+                            tel: tel,
+                            email: email,
+                            username: username,
+                            password: password
+                        }
+                    })];
+            case 2:
+                updatedUser = _b.sent();
+                res.json(updatedUser);
+                return [3 /*break*/, 4];
+            case 3:
+                e_2 = _b.sent();
+                console.error(e_2);
+                res.status(500).send('Internal server error');
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
+app["delete"]('/users/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userId, deletedUser, e_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                userId = parseInt(req.params.id);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, prisma.users["delete"]({
+                        where: {
+                            id: userId
+                        }
+                    })];
+            case 2:
+                deletedUser = _a.sent();
+                res.json(deletedUser);
+                return [3 /*break*/, 4];
+            case 3:
+                e_3 = _a.sent();
+                console.error(e_3);
+                res.status(500).send('Internal server error');
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
 app.get('/users', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var allUsers, e_2;
+    var allUsers, e_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -90,9 +151,9 @@ app.get('/users', function (req, res) { return __awaiter(void 0, void 0, void 0,
                 res.json(allUsers);
                 return [3 /*break*/, 3];
             case 2:
-                e_2 = _a.sent();
-                console.error(e_2);
-                res.status(500).send('Internal server erroraa');
+                e_4 = _a.sent();
+                console.error(e_4);
+                res.status(500).send('Internal server error');
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

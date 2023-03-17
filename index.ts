@@ -27,6 +27,46 @@ app.post('/users', async (req, res) => {
   }
 })
 
+app.put('/users/:id', async (req, res) => {
+  const { id } = req.params
+  const { first_name, last_name, tel, email, username, password } = req.body
+
+  try {
+    const updatedUser = await prisma.users.update({
+      where: { id: parseInt(id) },
+      data: {
+        first_name,
+        last_name,
+        tel,
+        email,
+        username,
+        password,
+      },
+    })
+    res.json(updatedUser)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send('Internal server error')
+  }
+})
+
+
+app.delete('/users/:id', async (req, res) => {
+  const userId = parseInt(req.params.id)
+  try {
+    const deletedUser = await prisma.users.delete({
+      where: {
+        id: userId,
+      },
+    })
+    res.json(deletedUser)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send('Internal server error')
+  }
+})
+
+
 app.get('/users', async (req, res) => {
   try {
     const allUsers = await prisma.users.findMany({
