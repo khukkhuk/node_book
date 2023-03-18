@@ -1,4 +1,4 @@
-// import express from 'express'
+
 import * as express from 'express';
 import { PrismaClient } from '@prisma/client'
 
@@ -50,7 +50,6 @@ app.put('/users/:id', async (req, res) => {
   }
 })
 
-
 app.delete('/users/:id', async (req, res) => {
   const userId = parseInt(req.params.id)
   try {
@@ -65,7 +64,6 @@ app.delete('/users/:id', async (req, res) => {
     res.status(500).send('Internal server error')
   }
 })
-
 
 app.get('/users', async (req, res) => {
   try {
